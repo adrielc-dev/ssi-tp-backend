@@ -6,7 +6,11 @@ const port = process.env.PORT || 3000;
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.enableCors({
-        origin: ['http://localhost:5173', 'http://localhost:4173'],
+        origin: [
+            'http://localhost:5173',
+            'http://localhost:4173',
+            'https://ssi-tp-frontend.onrender.com',
+        ],
         methods: ['GET', 'POST'],
         credentials: true,
     });

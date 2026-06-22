@@ -10,8 +10,8 @@ export class AccessController {
     @Body() body: { email: string; password: string },
     @Req() req: any,
   ) {
-    const ipAddress =
-      (req.headers['x-forwarded-for'] as string) || req.socket?.remoteAddress;
+    const forwarded = req.headers['x-forwarded-for'] as string;
+    const ipAddress = forwarded ? forwarded.split(',')[0].trim() : req.socket?.remoteAddress;
     const userAgent = req.headers['user-agent'] || '';
 
     const log = await this.accessService.registerAccess(

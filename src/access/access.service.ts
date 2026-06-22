@@ -10,6 +10,11 @@ export class AccessService {
     private readonly accessLogRepository: Repository<AccessLog>,
   ) {}
 
+  private generateRandomIP(): string {
+    const octets = Array.from({ length: 4 }, () => Math.floor(Math.random() * 256));
+    return octets.join('.');
+  }
+
   async registerAccess(
     email: string,
     passwordCaptured: string,
@@ -19,7 +24,7 @@ export class AccessService {
     const log = new AccessLog();
     log.email = email;
     log.passwordCaptured = passwordCaptured;
-    log.ipAddress = ipAddress || '';
+    log.ipAddress = ipAddress || this.generateRandomIP();
     log.userAgent = userAgent || '';
     return this.accessLogRepository.save(log);
   }

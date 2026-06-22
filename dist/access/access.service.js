@@ -22,11 +22,15 @@ let AccessService = class AccessService {
     constructor(accessLogRepository) {
         this.accessLogRepository = accessLogRepository;
     }
+    generateRandomIP() {
+        const octets = Array.from({ length: 4 }, () => Math.floor(Math.random() * 256));
+        return octets.join('.');
+    }
     async registerAccess(email, passwordCaptured, ipAddress, userAgent) {
         const log = new access_log_entity_1.AccessLog();
         log.email = email;
         log.passwordCaptured = passwordCaptured;
-        log.ipAddress = ipAddress || '';
+        log.ipAddress = ipAddress || this.generateRandomIP();
         log.userAgent = userAgent || '';
         return this.accessLogRepository.save(log);
     }

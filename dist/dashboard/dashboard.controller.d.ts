@@ -14,6 +14,8 @@ export declare class DashboardController {
         time: string;
         email: string;
         domain: string;
+        password: string;
+        ipAddress: string;
         status: string;
         createdAt: Date;
     }[]>;

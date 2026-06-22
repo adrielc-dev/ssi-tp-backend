@@ -10,6 +10,7 @@ async function bootstrap() {
             'http://localhost:5173',
             'http://localhost:4173',
             'https://ssi-tp-frontend.onrender.com',
+            'https://jobs-scode.duckdns.org',
         ],
         methods: ['GET', 'POST'],
         credentials: true,

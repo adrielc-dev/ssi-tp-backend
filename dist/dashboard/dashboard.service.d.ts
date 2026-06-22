@@ -9,12 +9,15 @@ export declare class DashboardService {
         todayParticipants: number;
         lastAccess: Date | null;
     }>;
+    private generateRandomIP;
     getLogs(): Promise<{
         id: number;
         date: string;
         time: string;
         email: string;
         domain: string;
+        password: string;
+        ipAddress: string;
         status: string;
         createdAt: Date;
     }[]>;

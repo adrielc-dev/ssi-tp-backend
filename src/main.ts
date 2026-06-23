@@ -7,12 +7,13 @@ const port = process.env.PORT || 3000;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  const frontendUrl = process.env.FRONTEND_URL || 'https://jobs-scode.duckdns.org';
+
   app.enableCors({
     origin: [
       'http://localhost:5173',
       'http://localhost:4173',
-      'https://ssi-tp-frontend.onrender.com',
-      'https://jobs-scode.duckdns.org',
+      frontendUrl,
     ],
     methods: ['GET', 'POST'],
     credentials: true,

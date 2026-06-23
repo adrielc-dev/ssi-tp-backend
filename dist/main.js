@@ -5,12 +5,12 @@ const app_module_1 = require("./app.module");
 const port = process.env.PORT || 3000;
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    const frontendUrl = process.env.FRONTEND_URL || 'https://jobs-scode.duckdns.org';
     app.enableCors({
         origin: [
             'http://localhost:5173',
             'http://localhost:4173',
-            'https://ssi-tp-frontend.onrender.com',
-            'https://jobs-scode.duckdns.org',
+            frontendUrl,
         ],
         methods: ['GET', 'POST'],
         credentials: true,

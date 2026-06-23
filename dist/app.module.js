@@ -12,18 +12,30 @@ const typeorm_1 = require("@nestjs/typeorm");
 const access_module_1 = require("./access/access.module");
 const dashboard_module_1 = require("./dashboard/dashboard.module");
 const access_log_entity_1 = require("./access/access-log.entity");
+function databaseConfig() {
+    if (process.env.DATABASE_URL) {
+        return typeorm_1.TypeOrmModule.forRoot({
+            type: 'postgres',
+            url: process.env.DATABASE_URL,
+            entities: [access_log_entity_1.AccessLog],
+            synchronize: true,
+            ssl: { rejectUnauthorized: false },
+        });
+    }
+    return typeorm_1.TypeOrmModule.forRoot({
+        type: 'better-sqlite3',
+        database: 'database.sqlite',
+        entities: [access_log_entity_1.AccessLog],
+        synchronize: true,
+    });
+}
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'better-sqlite3',
-                database: 'database.sqlite',
-                entities: [access_log_entity_1.AccessLog],
-                synchronize: true,
-            }),
+            databaseConfig(),
             access_module_1.AccessModule,
             dashboard_module_1.DashboardModule,
         ],

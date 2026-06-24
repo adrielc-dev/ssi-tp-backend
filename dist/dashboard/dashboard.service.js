@@ -56,8 +56,9 @@ let DashboardService = class DashboardService {
             const createdAt = new Date(log.createdAt);
             return {
                 id: log.id,
-                date: createdAt.toLocaleDateString('es-AR'),
+                date: createdAt.toLocaleDateString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' }),
                 time: createdAt.toLocaleTimeString('es-AR', {
+                    timeZone: 'America/Argentina/Buenos_Aires',
                     hour: '2-digit',
                     minute: '2-digit',
                 }),

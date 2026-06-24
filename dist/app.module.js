@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const access_module_1 = require("./access/access.module");
 const dashboard_module_1 = require("./dashboard/dashboard.module");
+const seed_module_1 = require("./seed/seed.module");
 const access_log_entity_1 = require("./access/access-log.entity");
 function databaseConfig() {
     if (process.env.DATABASE_URL) {
@@ -38,6 +39,7 @@ exports.AppModule = AppModule = __decorate([
             databaseConfig(),
             access_module_1.AccessModule,
             dashboard_module_1.DashboardModule,
+            seed_module_1.SeedModule,
         ],
     })
 ], AppModule);

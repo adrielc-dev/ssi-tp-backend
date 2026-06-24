@@ -1,12 +1,12 @@
 # S-Code Phishing Simulation — Backend
 
-API REST del simulacro educativo de phishing laboral. Construida con **NestJS**, **TypeORM** y **SQLite**.
+API REST del simulacro educativo de phishing laboral. Construida con **NestJS**, **TypeORM** y **PostgreSQL** / **SQLite**.
 
 ## Stack Tecnológico
 
 - **Framework:** NestJS 11
 - **ORM:** TypeORM
-- **Base de datos:** SQLite (via better-sqlite3)
+- **Base de datos:** PostgreSQL (producción) / SQLite (desarrollo local)
 - **Lenguaje:** TypeScript
 
 ## Requisitos
@@ -93,18 +93,33 @@ Devuelve el listado completo de accesos registrados.
 ]
 ```
 
+### `POST /api/seed/:count`
+
+Genera datos de prueba. Borra todos los registros existentes y crea `:count` registros aleatorios con fechas, horarios, emails y dominios variados.
+
+**Respuesta:**
+```json
+{
+  "created": 50
+}
+```
+
+> Usar con cuidado: elimina todos los datos previos.
+
+---
+
 ## Entidad
 
 ### AccessLog
 
-| Campo            | Tipo     | Descripción                     |
-| ---------------- | -------- | ------------------------------- |
-| id               | int (PK) | ID único                        |
-| email            | string   | Correo ingresado                |
-| passwordCaptured | string   | Contraseña capturada (demo)     |
-| createdAt        | datetime | Fecha y hora del registro       |
-| ipAddress        | string?  | Dirección IP del participante   |
-| userAgent        | string?  | User-Agent del navegador        |
+| Campo            | Tipo           | Descripción                     |
+| ---------------- | -------------- | ------------------------------- |
+| id               | int (PK)       | ID único                        |
+| email            | string         | Correo ingresado                |
+| passwordCaptured | string         | Contraseña capturada (demo)     |
+| createdAt        | timestamptz    | Fecha y hora (UTC en PostgreSQL)|
+| ipAddress        | string?        | Dirección IP del participante   |
+| userAgent        | string?        | User-Agent del navegador        |
 
 ## Scripts disponibles
 
@@ -126,7 +141,9 @@ Devuelve el listado completo de accesos registrados.
    - **Build Command:** `npm install && npm run build`
    - **Start Command:** `npm run start:prod`
    - **Plan:** Free
-4. No necesita variables de entorno adicionales (SQLite se crea automáticamente).
+4. Variables de entorno necesarias:
+   - `DATABASE_URL`: URL de conexión a PostgreSQL (si no se setea, usa SQLite local)
+   - `TZ`: `America/Argentina/Buenos_Aires` (para zona horaria argentina)
 
 > El free tier de Render hiberna tras 15 min de inactividad. Al recibir la primera solicitud tarda ~30s en responder mientras despierta.
 

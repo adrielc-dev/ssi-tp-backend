@@ -33,7 +33,7 @@ __decorate([
     __metadata("design:type", String)
 ], AccessLog.prototype, "passwordCaptured", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)({ name: 'created_at' }),
+    (0, typeorm_1.CreateDateColumn)({ name: 'created_at', type: 'timestamptz' }),
     __metadata("design:type", Date)
 ], AccessLog.prototype, "createdAt", void 0);
 __decorate([

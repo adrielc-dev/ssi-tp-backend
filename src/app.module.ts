@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccessModule } from './access/access.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { SeedModule } from './seed/seed.module';
 import { AccessLog } from './access/access-log.entity';
 
 function databaseConfig() {
@@ -28,6 +29,7 @@ function databaseConfig() {
     databaseConfig(),
     AccessModule,
     DashboardModule,
+    SeedModule,
   ],
 })
 export class AppModule {}

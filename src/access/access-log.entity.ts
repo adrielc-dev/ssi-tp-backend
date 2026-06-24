@@ -16,7 +16,7 @@ export class AccessLog {
   @Column({ name: 'password_captured' })
   passwordCaptured: string;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
   createdAt: Date;
 
   @Column({ name: 'ip_address', nullable: true })

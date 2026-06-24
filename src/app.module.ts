@@ -12,6 +12,7 @@ function databaseConfig() {
       entities: [AccessLog],
       synchronize: true,
       ssl: { rejectUnauthorized: false },
+      timezone: 'UTC',
     });
   }
 
